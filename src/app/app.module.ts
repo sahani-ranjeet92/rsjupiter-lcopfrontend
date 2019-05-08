@@ -1,4 +1,5 @@
-import {HttpClientModule} from '@angular/common/http';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,10 +20,12 @@ import { ReactiveFormsModule } from '@angular/forms';
         CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,
+        HttpModule,
        // LanguageTranslationModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxWebstorageModule.forRoot()
+        
     ],
     declarations: [AppComponent, NotFoundComponent],
     providers: [UserApiService,HttpHelperService,UserManagementService],//AuthGuard],

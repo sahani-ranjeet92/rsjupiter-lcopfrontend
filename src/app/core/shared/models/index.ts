@@ -1,1 +1,2 @@
-export  { ErrorResponse,AuthUser,ValidationMessage } from './constVariable';
+export  { ErrorResponse,ValidationMessage } from './constVariable';
+export  { AuthUser } from './common.model';

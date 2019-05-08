@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   localStorage: {
     token : 'session_token'
-  }
+  },
+  BASE_API_URL: '/api'
 };
 
 /*

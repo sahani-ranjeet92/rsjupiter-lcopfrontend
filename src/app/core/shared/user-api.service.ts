@@ -1,3 +1,4 @@
+import {environment} from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,11 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class UserApiService {
 
- baseUrl: String = 'http://localhost:8081/';
+private baseUrl = environment.BASE_API_URL + '/lco-user';
 
   constructor() { }
 
   getLoginUrl(){
-    return this.baseUrl + "";
+    return this.baseUrl + "/getUser";
   }
 }

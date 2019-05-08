@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers, Response, URLSearchParams } from '@angular/http';
+import { Http, RequestOptions, Headers, Response, URLSearchParams, } from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -15,7 +15,7 @@ import {ErrorResponse } from './models';
 export class HttpHelperService {
 
 
-  constructor(private router: Router,private localStorage: LocalStorageService,private http: Http) { }
+constructor(private router: Router,private localStorage: LocalStorageService,private http: Http) { }
 
 
 private checkAuthHeader(response: Response) {

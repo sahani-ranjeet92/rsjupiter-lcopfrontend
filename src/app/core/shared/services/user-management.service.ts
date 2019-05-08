@@ -10,7 +10,7 @@ export class UserManagementService {
   constructor(private userApiService: UserApiService,private httpHelper: HttpHelperService) { } 
 
   logIn(body : any){
-    return this.httpHelper.post(this.userApiService.getLoginUrl(),body,true,false,null);
+    return this.httpHelper.get(this.userApiService.getLoginUrl(),body,false,null);
   }
 
 }
