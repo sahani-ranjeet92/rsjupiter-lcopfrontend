@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-//import { AuthGuard } from './shared';
+import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
-    //{ path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard] },
+    { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard] },
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'register', loadChildren: './register/register.module#RegisterModule' },
     //{ path: 'error', loadChildren: './server-error/server-error.module#ServerErrorModule' },

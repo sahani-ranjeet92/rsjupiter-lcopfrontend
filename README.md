@@ -34,3 +34,5 @@ ng g m register\register-routing document-list --flat
 ng generate component pages/about --module=app.module
 // or
 ng generate component pages/about --module=shared.module
+
+ng generate class foo --type=bar --> foo.bar.ts

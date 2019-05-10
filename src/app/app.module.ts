@@ -13,7 +13,7 @@ import { UserApiService } from './core/shared/user-api.service';
 import { HttpHelperService } from './core/shared/http-helper.service';
 import { UserManagementService } from './core/shared/services/user-management.service';
 import { ReactiveFormsModule } from '@angular/forms';
-//import { AuthGuard } from './shared';
+import { AuthGuard } from './core/guard/auth.guard';
 
 @NgModule({
     imports: [
@@ -28,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         
     ],
     declarations: [AppComponent, NotFoundComponent],
-    providers: [UserApiService,HttpHelperService,UserManagementService],//AuthGuard],
+    providers: [UserApiService,HttpHelperService,UserManagementService,AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
