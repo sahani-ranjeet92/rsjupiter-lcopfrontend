@@ -15,11 +15,10 @@ constructor(private localStorage: LocalStorageService,
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    debugger;
     if(this.localStorage.retrieve('userId')){
       return true;
     }else{
-      this.router.navigate['/login'];
+      this.router.navigate(['/login']);
       return false;
     }
   }
