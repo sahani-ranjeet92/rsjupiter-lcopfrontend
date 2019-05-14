@@ -1,5 +1,14 @@
-<nav>
-<a [routerLink]="['/channels']">channels</a><br>
-<a [routerLink]="['/users']">users</a><br>
-<a [routerLink]="['/orders']">orders</a><br>
+<!--<div class="sidbar-toggle-btn" style="display : {{collapsed?'none':'block'}}" [ngClass]="{collapsed: collapsed}"  (click) =toggleCollapsed()>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>-->
+
+
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}" >
+    <div class="list-group">
+        <a class="list-group-item" routerLink="/channels" [routerLinkActive]="['active']">channels</a>
+        <a class="list-group-item" [routerLink]="['/users']" [routerLinkActive]="['active']">users</a>
+        <a class="list-group-item" [routerLink]="['/orders']" [routerLinkActive]="['active']">orders</a>
+    </div>
 </nav>

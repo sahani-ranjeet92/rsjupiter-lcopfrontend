@@ -1,8 +1,6 @@
-<p>
-  layout works!
-</p>
 <app-header></app-header>
-<app-side-bar></app-side-bar>
-<section>
+<app-side-bar (collapsedEvent)="receiveCollapsed($event)"></app-side-bar>
+<section class = "main-container">
   <router-outlet></router-outlet>
 </section>
+<app-footer></app-footer>
