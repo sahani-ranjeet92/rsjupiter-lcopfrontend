@@ -13,4 +13,8 @@ export class UserManagementService {
     return this.httpHelper.get(this.userApiService.getLoginUrl(),body,false,null);
   }
 
+  getAllChannelList(){
+    return this.httpHelper.get(this.userApiService.getAllChannelListUrl(),null);
+  }
+
 }

@@ -6,11 +6,16 @@ import { Injectable } from '@angular/core';
 })
 export class UserApiService {
 
-private baseUrl = environment.BASE_API_URL + '/lco-user';
+private baseUrl = environment.BASE_API_URL;
 
   constructor() { }
 
   getLoginUrl(){
-    return this.baseUrl + "/getUser";
+    return this.baseUrl + "'/lco-user/getUser";
   }
+
+  getAllChannelListUrl(){
+    return this.baseUrl + "/product/getProductList";
+  }
+
 }
