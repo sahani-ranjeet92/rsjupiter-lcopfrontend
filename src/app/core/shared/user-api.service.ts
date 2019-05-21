@@ -11,7 +11,7 @@ private baseUrl = environment.BASE_API_URL;
   constructor() { }
 
   getLoginUrl(){
-    return this.baseUrl + "'/lco-user/getUser";
+    return this.baseUrl + "/lco-user/getUser";
   }
 
   getAllChannelListUrl(){
