@@ -1,23 +1,3 @@
-<div>
-<table id="table-channels" class="table table-bordered table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>Ch Number</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of channel_list">
-            <td>{{item.chnumber}}</td>
-            <td>{{item.chname}}</td>
-            <td>{{item.url}}</td>
-            <td>{{item.price}}</td>
-            <td>{{item.catentryId}}</td>
-        </tr>
-    </tbody>
-    <tfoot></tfoot>
-</table>
-</div>
+    <app-table #tableComp [heading]="'Channel List'" [id]="'table-channels'" [columns]="['Ch Number','Name','Image','Price','Action']" 
+    [rows]="['chnumber']" (initTable)="callFromChild($event)" ></app-table>
+    

@@ -94,3 +94,44 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class LayoutRoutingModule { }
+
+
+######  How to setup datatable?
+
+##install dependency
+npm install datatables.net
+npm install @types/datatables.net --save-dev
+npm install jszip --save
+npm install datatables.net-buttons --save
+npm install datatables.net-buttons-dt --save
+npm install datatables.net-buttons-bs4 --save
+npm install @types/datatables.net-buttons --save-dev
+npm install pdfmake --save
+npm install @types/pdfmake --save-dev
+
+
+##add import statementimport 'datatables.net';
+import * as $ from 'jquery';
+import 'datatables.net-buttons';
+import 'datatables.net-buttons/js/buttons.flash';
+import 'datatables.net-buttons/js/buttons.html5';
+import 'datatables.net-buttons/js/buttons.print';
+import {pdfMake} from 'pdfmake/build/pdfmake';
+import {pdfFonts} from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+### use by adding 
+const dataTable = $('#table-channels').DataTable({
+        dom: 'Bfrtip',
+buttons: ['copy', 'csv', 'excel', 'pdf', 'print']});
+
+
+##### call method of another component #####
+----> component A
+@Output() initTable = new EventEmitter();
+
+-----> component B
+define loadTableData() function
+
+-----> from component B html file
+<app-table (initTable)="loadTableData()"></app-table>

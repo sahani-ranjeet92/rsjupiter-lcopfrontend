@@ -1,14 +1,15 @@
 import { UserManagementService } from '../core/shared/services/user-management.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {ViewChild, ChangeDetectorRef,  Component,  OnInit,  Output} from '@angular/core';
+import { TableComponent } from '../common/table/table.component';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-buttons';
 import 'datatables.net-buttons/js/buttons.flash';
 import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.print';
-import {pdfMake} from 'pdfmake/build/pdfmake';
-import {pdfFonts} from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import { pdfMake } from 'pdfmake/build/pdfmake';
+// import {pdfMake} from 'pdfmake/build/vfs_fonts';
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 
@@ -19,13 +20,13 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ChannelsComponent implements OnInit {
 
+  @ViewChild('tableComp') tableComp: TableComponent;
   channel_list: any = null;
 
   constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.loadChannelList();
-
   }
   loadChannelList() {
     this.userService.getAllChannelList().subscribe(res => {
@@ -34,7 +35,9 @@ export class ChannelsComponent implements OnInit {
         this.channel_list = res.data;
       }
       this.chRef.detectChanges();
-      this.loadChannelsTable();
+      //this.loadChannelsTable();
+      this.tableComp.loadChannelsTable(this.channel_list);
+      // this.initTable.emit(this.channel_list);
 
     }, error => {
 
@@ -72,6 +75,10 @@ export class ChannelsComponent implements OnInit {
 
 
 
+  }
+
+  callFromChild(data){
+    console.log(data);
   }
 
 }

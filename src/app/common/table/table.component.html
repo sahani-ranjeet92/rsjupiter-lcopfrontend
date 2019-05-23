@@ -1,0 +1,15 @@
+<div class='container-fluid table-responsive'>
+    <table #lcoptable id="id" class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th *ngFor="let col of columns">{{col}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of data">
+                <td *ngFor="let item of row | keyvalue">{{item.value}}</td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>

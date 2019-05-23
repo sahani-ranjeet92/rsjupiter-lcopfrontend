@@ -1,7 +1,7 @@
-import {NgxWebstorageModule} from 'ngx-webstorage';
-import {HttpModule} from '@angular/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 //import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module';
@@ -21,14 +21,14 @@ import { AuthGuard } from './core/guard/auth.guard';
         BrowserModule,
         BrowserAnimationsModule,
         HttpModule,
-       // LanguageTranslationModule,
+        // LanguageTranslationModule,
         AppRoutingModule,
         ReactiveFormsModule,
         NgxWebstorageModule.forRoot()
-        
+
     ],
     declarations: [AppComponent, NotFoundComponent],
-    providers: [UserApiService,HttpHelperService,UserManagementService,AuthGuard],
+    providers: [UserApiService, HttpHelperService, UserManagementService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
