@@ -1,3 +1,20 @@
-<p>
-  users works!
-</p>
+<div class="row">
+  Users List
+</div>
+<app-table #tableComp [heading]="'User List'" [id]="'users_table'" [columns]="['userId',
+'username',
+'email',
+'firstName',
+'lastName',
+'gender',
+'status',
+'dateOfBirth',
+'createdTimestamp']" [rows]="['userId',
+'username',
+'email',
+'firstName',
+'lastName',
+'gender',
+'status',
+'dateOfBirth',
+'createdTimestamp']"></app-table>

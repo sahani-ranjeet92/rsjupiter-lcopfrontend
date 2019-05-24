@@ -7,7 +7,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let row of data">
-                <td *ngFor="let item of row | keyvalue">{{item.value}}</td>
+                <td *ngFor="let item of rows">{{row[item]}}</td>
             </tr>
         </tbody>
         <tfoot></tfoot>

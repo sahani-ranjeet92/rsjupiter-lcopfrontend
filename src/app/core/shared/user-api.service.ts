@@ -18,4 +18,8 @@ private baseUrl = environment.BASE_API_URL;
     return this.baseUrl + "/product/getProductList";
   }
 
+  getAllUserListUrl(){
+    return this.baseUrl + "/lco-user/getUserList";
+  }
+
 }
