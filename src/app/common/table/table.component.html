@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class='container-fluid table-responsive'>
-            <table #lcoptable id="id" class="table table-bordered table-striped" style="width:100%">
+            <table #lcoptable id="{{id}}" class="table table-bordered table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th></th>
@@ -13,7 +13,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let row of data">
-                        <td></td>
+                        <!--<input type='hidden' name='id_{{row['catentryId']}}' value='{{row['catentryId']}}'>-->
+                        <td><div style="display:none;">{{row['catentryId']}}</div></td>
                         <td *ngFor="let item of rows">{{row[item]}}</td>
                     </tr>
                 </tbody>

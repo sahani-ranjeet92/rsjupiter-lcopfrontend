@@ -83,13 +83,16 @@ export class TableComponent implements OnInit {
           {
             text: "Edit",
             action: () => {
-              tableContext.edit('');
+              let selectedRow = $('#'+tableContext.id+' tbody tr.selected td.select-checkbox div').html();
+              console.log(selectedRow);
+              tableContext.edit(selectedRow);
             }
           },
           {
             text: "Delete",
             action: () => {
-              tableContext.remove('');
+              let selectedRow = $('#'+tableContext.id+' tbody tr.selected td.select-checkbox div').html();
+              tableContext.remove(selectedRow);
             }
           }],
         columnDefs: [{
@@ -106,9 +109,6 @@ export class TableComponent implements OnInit {
         "orderClasses": false
       }
       );
-      console.log(dataTable.buttons);
-      // dataTable.buttons.container
-      // .appendTo('#example_wrapper .col-md-6:eq(0)');
     }, 0);
   }
 }

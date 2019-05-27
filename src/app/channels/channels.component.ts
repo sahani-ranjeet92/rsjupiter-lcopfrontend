@@ -52,12 +52,12 @@ export class ChannelsComponent implements OnInit {
 
   openEditModal(data) {
     console.log(data);
-    alert("open modal");
+    alert("open modal" + data);
   }
 
   openRemoveModal(data) {
     console.log(data);
-    alert("open modal");
+    alert("open modal" + data);
   }
 
   addChannel(){
