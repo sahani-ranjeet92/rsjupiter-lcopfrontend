@@ -14,7 +14,7 @@
                 <tbody>
                     <tr *ngFor="let row of data">
                         <!--<input type='hidden' name='id_{{row['catentryId']}}' value='{{row['catentryId']}}'>-->
-                        <td><div style="display:none;">{{row['catentryId']}}</div></td>
+                        <td><div style="display:none;">{{row[rows[0]]}}</div></td>
                         <td *ngFor="let item of rows">{{row[item]}}</td>
                     </tr>
                 </tbody>

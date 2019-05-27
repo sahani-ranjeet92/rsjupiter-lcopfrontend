@@ -1,5 +1,5 @@
-<app-table #tableComp [heading]="'Channel List'" [id]="'table-channels'" [columns]="['Ch Number','Name','Image','Price','Action']"
-    [rows]="['chnumber','chname','url','price','catentryId']" (openAddModal)="openAddModal()" (openEditModal)="openEditModal($event)"
+<app-table #tableComp [heading]="'Channel List'" [id]="'table-channels'" [columns]="['Action','Ch Number','Name','Image','Price']"
+    [rows]="['catentryId','chnumber','chname','url','price']" (openAddModal)="openAddModal()" (openEditModal)="openEditModal($event)"
     (openRemoveModal)="openRemoveModal($event)">
 </app-table>
 <div class="modal fade" #add_channel_modal>
