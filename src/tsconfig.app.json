@@ -3,7 +3,13 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "module": "es2015",
-    "types": []
+    "types": [
+    "jquery",
+    "datatables.net",
+    "datatables.net-buttons",
+    "bootstrap",
+    "datatables.net-select"
+    ]
   },
   "exclude": [
     "src/test.ts",

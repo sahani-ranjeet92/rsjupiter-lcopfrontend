@@ -4,6 +4,8 @@
 @import "utils";
 @import "rtl";
 @import "responsive";
+@import "../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
+@import "../../node_modules/datatables.net-buttons-dt/css/buttons.dataTables.min.css";
 
 @media print {
     .breadcrumb {
