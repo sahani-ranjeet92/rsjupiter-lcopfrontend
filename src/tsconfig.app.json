@@ -6,7 +6,9 @@
     "types": [
     "jquery",
     "datatables.net",
-    "datatables.net-buttons"
+    "datatables.net-buttons",
+    "bootstrap",
+    "datatables.net-select"
     ]
   },
   "exclude": [

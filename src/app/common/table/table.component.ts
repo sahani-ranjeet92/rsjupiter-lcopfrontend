@@ -1,7 +1,8 @@
-import {ElementRef, ViewChild,  Component,  OnInit,  Input,  Output,  EventEmitter,  ChangeDetectorRef} from '@angular/core';
+import { ElementRef, ViewChild, Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-buttons';
+import 'datatables.net-select';
 import 'datatables.net-buttons/js/buttons.flash';
 import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.print';
@@ -19,9 +20,11 @@ export class TableComponent implements OnInit {
   @Input() id: string;
   @Input() columns: Array<string>;
   @Input() rows: Array<Array<any>>;
-  @Output() initTable = new EventEmitter<any>();
-  data: Array<any>;
   @ViewChild('lcoptable') table: ElementRef;
+  @Output() openAddModal = new EventEmitter<any>();
+  @Output() openEditModal = new EventEmitter<any>();
+  @Output() openRemoveModal = new EventEmitter<any>();
+  data: Array<any>;
 
   constructor(private chRef: ChangeDetectorRef) {
 
@@ -30,36 +33,75 @@ export class TableComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-    console.log(this.table.nativeElement.value);
+  add() {
+    this.openAddModal.emit();
   }
 
-  callParent() {
-    debugger;
-    this.initTable.emit(this.columns);
+  edit(id) {
+    this.openEditModal.emit(id);
   }
 
-  loadChannelsTable(_data) {
-    const tableContext=this;
+  remove(id) {
+    this.openRemoveModal.emit(id);
+  }
+
+  initalizeTable(_data) {
+    const tableContext = this;
     this.data = _data;
     this.chRef.detectChanges();
-    debugger;
     setTimeout(function () {
       const _table: any = tableContext.table.nativeElement;
       const dataTable = $(_table).DataTable({
         dom: 'Bfrtip',
-        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-        "columnDefs": [
+        buttons: [
           {
-            "className": "dt-right",
-            "targets": [1, 2, 3, 4]
+            extend: 'copy',
+            title: tableContext.heading
           },
           {
-            "orderable": false,
-            "targets": 0
-          }
-        ],
-        "order": [],
+            extend: 'csv',
+            title: tableContext.heading
+          },
+          {
+            extend: 'excel',
+            title: tableContext.heading
+          },
+          {
+            extend: 'pdf',
+            title: tableContext.heading
+          },
+          {
+            extend: 'print',
+            title: tableContext.heading
+          },
+          {
+            text: "Add",
+            action: () => {
+              tableContext.add();
+            }
+          },
+          {
+            text: "Edit",
+            action: () => {
+              tableContext.edit('');
+            }
+          },
+          {
+            text: "Delete",
+            action: () => {
+              tableContext.remove('');
+            }
+          }],
+        columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+        }],
+        select: {
+          style: 'os',
+          selector: 'td:first-child'
+        },
+        "order": [[1, 'asc']],
         "autoWidth": false,
         "orderClasses": false
       }

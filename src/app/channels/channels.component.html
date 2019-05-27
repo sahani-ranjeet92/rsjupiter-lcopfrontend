@@ -1,3 +1,43 @@
-    <app-table #tableComp [heading]="'Channel List'" [id]="'table-channels'" [columns]="['Ch Number','Name','Image','Price','Action']" 
-    [rows]="['chnumber','chname','url','price','catentryId']" (initTable)="callFromChild($event)" ></app-table>
-    
+<app-table #tableComp [heading]="'Channel List'" [id]="'table-channels'" [columns]="['Ch Number','Name','Image','Price','Action']"
+    [rows]="['chnumber','chname','url','price','catentryId']" (openAddModal)="openAddModal()" (openEditModal)="openEditModal($event)"
+    (openRemoveModal)="openRemoveModal($event)">
+</app-table>
+<div class="modal fade" #add_channel_modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Channel</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form" [formGroup]="channelForm" (onsubmit)="addChannel()">
+                <fieldset class="form-group">
+                    <label for="chnumber" >Channel Number :</label>
+                    <input type ="text" class="form-control" formControlName="chnumber" name="chnumber" required/>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="chname" >Channel Name:</label>
+                    <input type ="text" class="form-control" formControlName="chname" name="chname" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price" >Channel Price :</label>
+                    <input type ="number" class="form-control" formControlName="price" name="price" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="channelImage" >Channel Image :</label>
+                    <input type ="text" class="form-control" formControlName="channelImage" name="channelImage" >
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <button type="submit" class="btn btn-default" [disabled]="!channelForm.valid">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

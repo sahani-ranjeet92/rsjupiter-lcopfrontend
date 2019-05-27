@@ -13,7 +13,7 @@ import { TableComponent } from '../common/table/table.component';
 })
 export class UsersComponent implements OnInit {
 
-  @ViewChild('tableComp') tableComp: TableComponent;
+  @ViewChild('userTableComp') tableComp: TableComponent;
 
   constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef) { }
 
@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
         alert("server error: "+res.message);
       }
       this.chRef.detectChanges();
-      this.tableComp.loadChannelsTable(user_list);
+      this.tableComp.initalizeTable(user_list);
 
     }, error => {
 

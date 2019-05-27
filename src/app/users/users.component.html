@@ -1,7 +1,5 @@
-<div class="row">
-  Users List
-</div>
-<app-table #tableComp [heading]="'User List'" [id]="'users_table'" [columns]="['userId',
+<app-table #userTableComp [heading]="'User List'" [id]="'users_table'" 
+[columns]="['userId',
 'username',
 'email',
 'firstName',
@@ -9,7 +7,8 @@
 'gender',
 'status',
 'dateOfBirth',
-'createdTimestamp']" [rows]="['userId',
+'createdTimestamp']" 
+[rows]="['userId',
 'username',
 'email',
 'firstName',
