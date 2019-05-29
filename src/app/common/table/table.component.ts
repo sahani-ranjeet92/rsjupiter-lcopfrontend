@@ -45,6 +45,10 @@ export class TableComponent implements OnInit {
     this.openRemoveModal.emit(id);
   }
 
+  destroyTable(){
+    $(this.table.nativeElement).destroy();
+  }
+
   initalizeTable(_data) {
     const tableContext = this;
     this.data = _data;

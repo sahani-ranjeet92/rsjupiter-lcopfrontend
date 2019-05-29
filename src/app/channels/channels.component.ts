@@ -14,15 +14,16 @@ export class ChannelsComponent implements OnInit {
 
   @ViewChild('tableComp') tableComp: TableComponent;
   @ViewChild('add_channel_modal') add_channel_modal: ElementRef;
+  @ViewChild('channelImage') channelImage: ElementRef;
   channel_list: any = null;
   public channelForm: FormGroup;
 
   constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef, private fb: FormBuilder) {
-   this.channelForm =  this.fb.group({
+    this.channelForm = this.fb.group({
       chnumber: ['', Validators.required],
-      chname: ['',Validators.required],
+      chname: ['', Validators.required],
       price: ['', Validators.required],
-      channelImage: ['',Validators.required]
+      channelImage: ['', Validators.required]
     });
   }
 
@@ -60,8 +61,32 @@ export class ChannelsComponent implements OnInit {
     alert("open modal" + data);
   }
 
-  addChannel(){
+  addChannel() {
     console.log("add channel");
+    console.log(this.channelImage.nativeElement.files[0]);
+    let body = this.getFormData();
+    this.userService.addChannel(body).subscribe(res => {
+      if (res.status == 200) {
+        this.tableComp.destroyTable();
+        this.loadChannelList();
+      }
+    }, error => {
+
+    }, () => {
+
+    });;
+  }
+
+  getFormData() {
+    let formData: FormData = new FormData();
+    formData.append('chnumber', this.channelForm.get('chnumber').value);
+    formData.append('chname', this.channelForm.get('chname').value);
+    formData.append('price', this.channelForm.get('price').value);
+    let image = this.channelImage.nativeElement.files;
+    if (image && image.length > 0) {
+      formData.append('channelImage', image[0]);
+    }
+    return formData;
   }
 
 }

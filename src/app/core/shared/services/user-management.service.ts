@@ -21,4 +21,8 @@ export class UserManagementService {
     return this.httpHelper.get(this.userApiService.getAllUserListUrl(),null);
   }
 
+  addChannel(body: any){
+    return this.httpHelper.post(this.userApiService.getAddChannelUrl(),body);
+  }
+
 }

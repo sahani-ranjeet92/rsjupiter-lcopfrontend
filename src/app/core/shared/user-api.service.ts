@@ -22,4 +22,16 @@ private baseUrl = environment.BASE_API_URL;
     return this.baseUrl + "/lco-user/getUserList";
   }
 
+  getAddChannelUrl(){
+    return this.baseUrl + "/product/addProduct";
+  }
+
+  getUpdateChannelUrl(){
+    return this.baseUrl + "/product/updateProduct";
+  }
+  
+  getRemoveChannelUrl(){
+    return  this.baseUrl + "/product/removeProduct";
+  }
+
 }
