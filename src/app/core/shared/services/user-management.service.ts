@@ -7,22 +7,34 @@ import { HttpHelperService } from '../http-helper.service';
 })
 export class UserManagementService {
 
-  constructor(private userApiService: UserApiService,private httpHelper: HttpHelperService) { } 
+  constructor(private userApiService: UserApiService, private httpHelper: HttpHelperService) { }
 
-  logIn(body : any){
-    return this.httpHelper.get(this.userApiService.getLoginUrl(),body,false,null);
+  logIn(body: any) {
+    return this.httpHelper.get(this.userApiService.getLoginUrl(), body, false, null);
   }
 
-  getAllChannelList(){
-    return this.httpHelper.get(this.userApiService.getAllChannelListUrl(),null);
+  getAllChannelList() {
+    return this.httpHelper.get(this.userApiService.getAllChannelListUrl(), null);
   }
 
-  getAllUserList(){
-    return this.httpHelper.get(this.userApiService.getAllUserListUrl(),null);
+  getAllUserList() {
+    return this.httpHelper.get(this.userApiService.getAllUserListUrl(), null);
   }
 
-  addChannel(body: any){
-    return this.httpHelper.post(this.userApiService.getAddChannelUrl(),body);
+  addChannel(body: any) {
+    return this.httpHelper.post(this.userApiService.getAddChannelUrl(), body);
+  }
+
+  removeChannel(body: any) {
+    return this.httpHelper.post(this.userApiService.getRemoveChannelUrl(), body, true);
+  }
+
+  getChannelDetail(body: any) {
+    return this.httpHelper.post(this.userApiService.getChannelDetailUrl(), body, true);
+  }
+
+  updateChannel(body: any) {
+    return this.httpHelper.post(this.userApiService.getUpdateChannelUrl(), body);
   }
 
 }

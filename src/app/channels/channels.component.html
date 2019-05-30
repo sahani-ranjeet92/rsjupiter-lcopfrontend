@@ -41,3 +41,38 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" #update_channel_modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update New Channel</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form" [formGroup]="editChannelForm" >
+                <fieldset class="form-group">
+                    <label for="chnumber" >Channel Number :</label>
+                    <input type ="text" class="form-control" formControlName="chnumber" name="chnumber" required/>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="chname" >Channel Name:</label>
+                    <input type ="text" class="form-control" formControlName="chname" name="chname" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price" >Channel Price :</label>
+                    <input type ="number" class="form-control" formControlName="price" name="price" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <button type="button" class="btn btn-primary" [disabled]="!editChannelForm.valid" (click)="updateChannel()">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

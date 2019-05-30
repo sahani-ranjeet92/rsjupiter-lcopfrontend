@@ -1,4 +1,4 @@
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,32 +6,36 @@ import { Injectable } from '@angular/core';
 })
 export class UserApiService {
 
-private baseUrl = environment.BASE_API_URL;
+  private baseUrl = environment.BASE_API_URL;
 
   constructor() { }
 
-  getLoginUrl(){
+  getLoginUrl() {
     return this.baseUrl + "/lco-user/getUser";
   }
 
-  getAllChannelListUrl(){
+  getAllChannelListUrl() {
     return this.baseUrl + "/product/getProductList";
   }
 
-  getAllUserListUrl(){
+  getAllUserListUrl() {
     return this.baseUrl + "/lco-user/getUserList";
   }
 
-  getAddChannelUrl(){
+  getAddChannelUrl() {
     return this.baseUrl + "/product/addProduct";
   }
 
-  getUpdateChannelUrl(){
+  getChannelDetailUrl() {
+    return this.baseUrl + "/product/getProduct";
+  }
+
+  getUpdateChannelUrl() {
     return this.baseUrl + "/product/updateProduct";
   }
-  
-  getRemoveChannelUrl(){
-    return  this.baseUrl + "/product/removeProduct";
+
+  getRemoveChannelUrl() {
+    return this.baseUrl + "/product/removeProduct";
   }
 
 }

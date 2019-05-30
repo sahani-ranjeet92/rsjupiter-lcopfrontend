@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
   @Output() openEditModal = new EventEmitter<any>();
   @Output() openRemoveModal = new EventEmitter<any>();
   data: Array<any>;
+  dataTable: any;
 
   constructor(private chRef: ChangeDetectorRef) {
 
@@ -38,15 +39,26 @@ export class TableComponent implements OnInit {
   }
 
   edit(id) {
-    this.openEditModal.emit(id);
+    if (id) {
+      this.openEditModal.emit(id);
+    } else {
+      alert("please select item!")
+    }
+
   }
 
   remove(id) {
-    this.openRemoveModal.emit(id);
+    if (id) {
+      this.openRemoveModal.emit(id);
+    } else {
+      alert("please select item!")
+    }
   }
 
-  destroyTable(){
-    $(this.table.nativeElement).destroy();
+  destroyTable() {
+    if (this.dataTable) {
+      this.dataTable.destroy();
+    }
   }
 
   initalizeTable(_data) {
@@ -55,7 +67,7 @@ export class TableComponent implements OnInit {
     this.chRef.detectChanges();
     setTimeout(function () {
       const _table: any = tableContext.table.nativeElement;
-      const dataTable = $(_table).DataTable({
+      tableContext.dataTable = $(_table).DataTable({
         dom: 'Bfrtip',
         buttons: [
           {
@@ -87,7 +99,7 @@ export class TableComponent implements OnInit {
           {
             text: "Edit",
             action: () => {
-              let selectedRow = $('#'+tableContext.id+' tbody tr.selected td.select-checkbox div').html();
+              let selectedRow = $('#' + tableContext.id + ' tbody tr.selected td.select-checkbox div').html();
               console.log(selectedRow);
               tableContext.edit(selectedRow);
             }
@@ -95,7 +107,7 @@ export class TableComponent implements OnInit {
           {
             text: "Delete",
             action: () => {
-              let selectedRow = $('#'+tableContext.id+' tbody tr.selected td.select-checkbox div').html();
+              let selectedRow = $('#' + tableContext.id + ' tbody tr.selected td.select-checkbox div').html();
               tableContext.remove(selectedRow);
             }
           }],

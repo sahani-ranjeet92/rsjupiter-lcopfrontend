@@ -15,8 +15,12 @@ export class ChannelsComponent implements OnInit {
   @ViewChild('tableComp') tableComp: TableComponent;
   @ViewChild('add_channel_modal') add_channel_modal: ElementRef;
   @ViewChild('channelImage') channelImage: ElementRef;
+  @ViewChild('update_channel_modal') update_channel_modal: ElementRef;
+
   channel_list: any = null;
   public channelForm: FormGroup;
+  public editChannelForm: FormGroup;
+  catentryId: any;
 
   constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef, private fb: FormBuilder) {
     this.channelForm = this.fb.group({
@@ -24,6 +28,11 @@ export class ChannelsComponent implements OnInit {
       chname: ['', Validators.required],
       price: ['', Validators.required],
       channelImage: ['', Validators.required]
+    });
+    this.editChannelForm = this.fb.group({
+      chnumber: ['', Validators.required],
+      chname: ['', Validators.required],
+      price: ['', Validators.required]
     });
   }
 
@@ -53,38 +62,102 @@ export class ChannelsComponent implements OnInit {
 
   openEditModal(data) {
     console.log(data);
-    alert("open modal" + data);
-  }
-
-  openRemoveModal(data) {
-    console.log(data);
-    alert("open modal" + data);
-  }
-
-  addChannel() {
-    console.log("add channel");
-    console.log(this.channelImage.nativeElement.files[0]);
-    let body = this.getFormData();
-    this.userService.addChannel(body).subscribe(res => {
+    let body = { "id": data };
+    this.userService.getChannelDetail(body).subscribe(res => {
       if (res.status == 200) {
-        this.tableComp.destroyTable();
-        this.loadChannelList();
+        this.initUpdateForm(res.data);
+        this.catentryId = data;
+        $(this.update_channel_modal.nativeElement).modal('show');
+      } else {
+        alert('server error!');
       }
     }, error => {
 
     }, () => {
 
-    });;
+    });
+
   }
 
-  getFormData() {
+  initUpdateForm(data: any) {
+    this.editChannelForm = this.fb.group({
+      chnumber: [data.chnumber, Validators.required],
+      chname: [data.chname, Validators.required],
+      price: [data.price, Validators.required]
+    });
+  }
+
+  openRemoveModal(data) {
+    console.log(data);
+    let body = { "id": data };
+    if (confirm('Are You Sure?')) {
+      this.userService.removeChannel(body).subscribe(res => {
+        if (res.status == 200) {
+          this.tableComp.destroyTable();
+          this.loadChannelList();
+        } else {
+          alert(res.message);
+        }
+      }, error => {
+
+      }, () => {
+
+      });
+    }
+  }
+
+  addChannel() {
+    console.log("add channel");
+    console.log(this.channelImage.nativeElement.files[0]);
+    let body = this.getFormData(this.channelForm, false);
+    this.userService.addChannel(body).subscribe(res => {
+      if (res.status == 200) {
+        this.tableComp.destroyTable();
+        this.loadChannelList();
+        $(this.add_channel_modal.nativeElement).modal('hide');
+      } else {
+        alert(res.message);
+      }
+    }, error => {
+
+    }, () => {
+
+    });
+  }
+
+  updateChannel(id: any) {
+    console.log("add channel");
+    if (!this.catentryId) {
+      alert('Invalid Input [productId]');
+      return;
+    }
+    let body = this.getFormData(this.editChannelForm, true);
+    body.append('catentryId', this.catentryId);
+    this.userService.updateChannel(body).subscribe(res => {
+      if (res.status == 200) {
+        this.tableComp.destroyTable();
+        this.loadChannelList();
+        $(this.update_channel_modal.nativeElement).modal('hide');
+      } else {
+        alert(res.message);
+      }
+    }, error => {
+      alert(error.json());
+    }, () => {
+
+    });
+  }
+
+  getFormData(form: FormGroup, isEdit: boolean) {
     let formData: FormData = new FormData();
     formData.append('chnumber', this.channelForm.get('chnumber').value);
     formData.append('chname', this.channelForm.get('chname').value);
-    formData.append('price', this.channelForm.get('price').value);
-    let image = this.channelImage.nativeElement.files;
-    if (image && image.length > 0) {
-      formData.append('channelImage', image[0]);
+    formData.append('price', Number.parseFloat(this.channelForm.get('price').value));
+    if (!isEdit) {
+      let image = this.channelImage.nativeElement.files;
+      if (image && image.length > 0) {
+        formData.append('channelImage', image[0]);
+      }
     }
     return formData;
   }
