@@ -4,4 +4,5 @@ export class ErrorResponse{
 
 export class ValidationMessage{
     public static INVALID_CREDENTIALS = "INVALID_CREDENTIALS";
+    public static SOMETHING_WENT_WRONG = "Something went wrong!";
 }

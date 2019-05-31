@@ -1,3 +1,6 @@
+
+<app-spinner #appspinner></app-spinner>
+
 <app-table #tableComp [heading]="'Channel List'" [id]="'table-channels'" [columns]="['Action','Ch Number','Name','Image','Price']"
     [rows]="['catentryId','chnumber','chname','url','price']" (openAddModal)="openAddModal()" (openEditModal)="openEditModal($event)"
     (openRemoveModal)="openRemoveModal($event)">
