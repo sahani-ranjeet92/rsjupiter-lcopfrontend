@@ -38,4 +38,8 @@ export class UserApiService {
     return this.baseUrl + "/product/removeProduct";
   }
 
+  getOrderListUrl(){
+    return this.baseUrl + "/order-service/getOrderList";
+  }
+
 }

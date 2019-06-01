@@ -1,3 +1,21 @@
-<p>
-  orders works!
-</p>
+<app-spinner #appspinner></app-spinner>
+
+<!--"userId": 1, "orderId": 1, "totalPrice": 0, "totalTax": 0, "orderStatus": null, "creationDate": "2019-04-17 06:57:19.0",
+"lastUpdate": "2019-04-22 00:37:24.0"-->
+<app-table #orderTableComp [heading]="'Order List'" [id]="'orders_table'" 
+[columns]="['orderId',
+     'userId',
+      'channels',
+      'totalPrice',
+      'totalTax',
+      'orderStatus',
+      'creationDate',
+      'lastUpdate']" 
+[rows]="['orderId',
+     'userId',
+     'quantity',
+      'totalPrice',
+      'totalTax',
+      'orderStatus',
+      'creationDate',
+      'lastUpdate']"></app-table>

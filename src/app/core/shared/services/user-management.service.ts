@@ -37,4 +37,12 @@ export class UserManagementService {
     return this.httpHelper.post(this.userApiService.getUpdateChannelUrl(), body);
   }
 
+  // order service start here
+
+  getOrderList() {
+    return this.httpHelper.get(this.userApiService.getOrderListUrl(), null);
+  }
+
+
+
 }

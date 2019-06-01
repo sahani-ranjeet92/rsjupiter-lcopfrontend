@@ -1,5 +1,5 @@
 import { UserManagementService } from '../core/shared/services/user-management.service';
-import { ViewChild, ChangeDetectorRef, Component, OnInit, Output, ElementRef } from '@angular/core';
+import { ElementRef, ViewChild, ChangeDetectorRef, Component, OnInit, Output } from '@angular/core';
 import { TableComponent } from '../common/table/table.component';
 import { SpinnerComponent } from '../common/spinner/spinner.component';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -24,6 +24,7 @@ export class ChannelsComponent implements OnInit {
     public channelForm: FormGroup;
     public editChannelForm: FormGroup;
     catentryId: any;
+    loading: boolean = false;
 
     constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef, private fb: FormBuilder) {
         this.channelForm = this.fb.group({
@@ -47,12 +48,14 @@ export class ChannelsComponent implements OnInit {
             if (res.status == 200) {
                 this.channel_list = null;
                 this.channel_list = res.data;
+            } else {
+                alert(ValidationMessage.SOMETHING_WENT_WRONG);
             }
             this.chRef.detectChanges();
             this.tableComp.initalizeTable(this.channel_list);
 
         }, error => {
-
+            alert(ValidationMessage.SOMETHING_WENT_WRONG);
         }, () => {
 
         });
@@ -113,6 +116,7 @@ export class ChannelsComponent implements OnInit {
     addChannel() {
         console.log("add channel");
         this.spinner.loading = true;
+        this.loading = true;
         console.log(this.channelImage.nativeElement.files[0]);
         let body = this.getFormData(this.channelForm, false);
         this.userService.addChannel(body).subscribe(res => {
@@ -123,10 +127,14 @@ export class ChannelsComponent implements OnInit {
             } else {
                 alert(res.message);
             }
+            this.spinner.loading = false;
+            this.loading = false;
         }, error => {
             alert(ValidationMessage.SOMETHING_WENT_WRONG);
-        }, () => {
             this.spinner.loading = false;
+            this.loading = false;
+        }, () => {
+
         });
     }
 
@@ -137,6 +145,7 @@ export class ChannelsComponent implements OnInit {
             return;
         }
         this.spinner.loading = true;
+        this.loading = true;
         let body = this.getFormData(this.editChannelForm, true);
         body.append('catentryId', this.catentryId);
         this.userService.updateChannel(body).subscribe(res => {
@@ -147,10 +156,14 @@ export class ChannelsComponent implements OnInit {
             } else {
                 alert(res.message);
             }
+            this.spinner.loading = false;
+            this.loading = false;
         }, error => {
             alert(ValidationMessage.SOMETHING_WENT_WRONG);
-        }, () => {
             this.spinner.loading = false;
+            this.loading = false;
+        }, () => {
+
         });
     }
 

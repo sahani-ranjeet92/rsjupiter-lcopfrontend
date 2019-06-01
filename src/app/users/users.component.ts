@@ -18,9 +18,9 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.loadChannelList();
+    this.loadUserList();
   }
-  loadChannelList() {
+  loadUserList() {
     this.userService.getAllUserList().subscribe(res => {
       let user_list = [];
       if (res.status == 200) {

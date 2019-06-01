@@ -38,7 +38,7 @@
                     <div class="valid-feedback"></div>
                     <div class = "invalid-feedback">Please enter value</div>
                 </fieldset>
-                <button type="button" class="btn btn-primary" [disabled]="!channelForm.valid" (click)="addChannel()">Submit</button>
+                <button type="button" class="btn btn-primary" [disabled]="!channelForm.valid || loading" (click)="addChannel()">Submit</button>
                 </form>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     <div class="valid-feedback"></div>
                     <div class = "invalid-feedback">Please enter value</div>
                 </fieldset>
-                <button type="button" class="btn btn-primary" [disabled]="!editChannelForm.valid" (click)="updateChannel()">Update</button>
+                <button type="button" class="btn btn-primary" [disabled]="!editChannelForm.valid || loading" (click)="updateChannel()">Update</button>
                 </form>
             </div>
         </div>
