@@ -42,4 +42,12 @@ export class UserApiService {
     return this.baseUrl + "/order-service/getOrderList";
   }
 
+  getOrderDetailUrl(){
+    return this.baseUrl + "/order-service/getOrderDetail";
+  }
+
+  getAddOrderItemUrl(){
+    return this.baseUrl + "/order-service/addOrderItem";
+  }
+
 }

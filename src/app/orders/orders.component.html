@@ -18,4 +18,49 @@
       'totalTax',
       'orderStatus',
       'creationDate',
-      'lastUpdate']"></app-table>
+      'lastUpdate']"
+(openAddModal) = "openAddOrderModal()" 
+(openEditModal)= "openAddOrderItemModal($event)">
+</app-table>
+
+
+<div class="modal fade" #add_order_modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create New Order</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form" [formGroup]="orderForm" >
+                <fieldset class="form-group">
+                    <label for="userId" >Channel List:</label>
+                    <select type ="text" class="form-control" formControlName="userId" name="userId" required>
+                       <option value="">Select Product</option>
+                 <option *ngFor="let row of userList" value="{{row.userId}}">{{row.username}}</option>   
+                    </select>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                
+                <fieldset class="form-group">
+                    <label for="catentryId" >Channel List:</label>
+                    <select type ="text" class="form-control" formControlName="catentryId" name="catentryId" required>
+                       <option value="">Select Product</option>
+                       <option *ngFor="let row of channelList" value="{{row.catentryId}}">{{row.chname}},{{row.chnumber}},{{row.price}}</option>   
+                    </select>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <button type="button" class="btn btn-primary" [disabled]="!orderForm.valid || loading" (click)="createNewOrder()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+
+
+
+

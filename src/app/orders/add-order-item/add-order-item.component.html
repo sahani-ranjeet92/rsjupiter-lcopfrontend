@@ -1,0 +1,15 @@
+<app-spinner #appspinner></app-spinner>
+
+<div class="container">
+<h3>Order# {{orders?.orderId}} UserId# {{orders?.userId}}</h3>
+            <h4>Price# {{orders?.totalPrice}}</h4>
+            <h4>Created On# {{orders?.creationDate}}</h4>
+            <h4>Updated On# {{orders?.lastUpdate}}</h4>
+
+<app-table #orderChannelsTableComp [heading]="'Order Items'" [id]="'table-order-channels'" [columns]="['Action','Ch Number','Name','Image','Price']"
+    [rows]="['orderitemsId','chnumber','chname','url','productprice']" (openRemoveModal)="removeOrderItem($event)"></app-table>
+
+<app-table #channelsTableComp [heading]="'Channels'" [id]="'table-channels'" [columns]="['Action','Ch Number','Name','Image','Price']"
+    [rows]="['catentryId','chnumber','chname','url','price']" (openEditModal)="addOrderItem($event)"></app-table>
+    
+</div>

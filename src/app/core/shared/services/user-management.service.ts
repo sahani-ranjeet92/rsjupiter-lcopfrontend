@@ -43,6 +43,18 @@ export class UserManagementService {
     return this.httpHelper.get(this.userApiService.getOrderListUrl(), null);
   }
 
+  getOrderDetail(body: any) {
+    return this.httpHelper.get(this.userApiService.getOrderDetailUrl(), body, true);
+  }
+
+  addOrderItem(body: any){
+    return this.httpHelper.post(this.userApiService.getAddOrderItemUrl(), body);;
+  }
+
+  removeOrderItem(body: any){
+    return null;
+  }
+
 
 
 }
