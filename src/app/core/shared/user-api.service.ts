@@ -38,16 +38,21 @@ export class UserApiService {
     return this.baseUrl + "/product/removeProduct";
   }
 
-  getOrderListUrl(){
+  getOrderListUrl() {
     return this.baseUrl + "/order-service/getOrderList";
   }
 
-  getOrderDetailUrl(){
+  getOrderDetailUrl() {
     return this.baseUrl + "/order-service/getOrderDetail";
   }
 
-  getAddOrderItemUrl(){
+  getAddOrderItemUrl() {
     return this.baseUrl + "/order-service/addOrderItem";
   }
+
+  getRemoveOrderItemUrl() {
+    return this.baseUrl + "/order-service/removeOrderItem"
+  }
+
 
 }

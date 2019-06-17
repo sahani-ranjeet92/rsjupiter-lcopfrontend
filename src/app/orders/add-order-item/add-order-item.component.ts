@@ -4,11 +4,13 @@ import { UserManagementService } from '../../core/shared/services/user-managemen
 import { ActivatedRoute, Router } from '@angular/router';
 import { Orders } from '../../core/shared/models/common.model';
 import { TableComponent } from '../../common/table/table.component';
-import { ViewChild, Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, ElementRef,  ViewChild,  Component,  OnInit} from '@angular/core';
+import { ValidationMessage } from '../../core/shared/models';
 import * as $ from 'jquery';
 import 'bootstrap';
-import { ValidationMessage } from '../../core/shared/models';
-
+import 'datatables.net';
+import 'datatables.net-buttons';
+import 'datatables.net-select';
 
 @Component({
   selector: 'app-add-order-item',
@@ -18,12 +20,15 @@ import { ValidationMessage } from '../../core/shared/models';
 export class AddOrderItemComponent implements OnInit {
 
   @ViewChild('appspinner') spinner: SpinnerComponent;
-  @ViewChild('orderChannelsTableComp') orderChannelsTableComp: TableComponent;
-  @ViewChild('channelsTableComp') channelsTableComp: TableComponent;
+  @ViewChild('orderChannelsTableComp') orderChannelsTableComp: ElementRef;
+  @ViewChild('channelsTableComp') channelsTableComp: ElementRef;
 
   public orders: Orders;
+  public channels: any;
+  orderChannelsDataTable: any;
+  channelsTable: any;
 
-  constructor(private route: ActivatedRoute, private userService: UserManagementService) { }
+  constructor(private route: ActivatedRoute, private userService: UserManagementService,private chRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     let orderId = this.route.snapshot.params['orderId'];
@@ -41,20 +46,21 @@ export class AddOrderItemComponent implements OnInit {
       let res = results[0];
       if (res.status == 200) {
         this.orders = res.data;
-        this.orderChannelsTableComp.initalizeTable(this.orders.channels);
+        this.initalizeOrderItemsTable();
       } else {
         alert(ValidationMessage.SOMETHING_WENT_WRONG);
       }
 
       res = results[1];
       if (res.status == 200) {
-        this.channelsTableComp.initalizeTable(res.data);
+        this.channels = res.data;
+        this.initalizeChannelsTable();
       } else {
         alert(ValidationMessage.SOMETHING_WENT_WRONG);
       }
 
     }, error => {
-      alert(this.getErrorMessage(error));
+      alert(this.getErrorMessage(error.json()));
       this.spinner.loading = false;
     }, () => {
       this.spinner.loading = false;
@@ -64,22 +70,28 @@ export class AddOrderItemComponent implements OnInit {
 
   removeOrderItem(data) {
     console.log(data);
+    if (!data) {
+      alert("Please select item");
+      return;
+    }
     let body = {
-      "orderItemsId": data,
-      "orderId": this.orders.orderId
+      "orderItemId": data,
+      "orderId": this.orders.orderId,
+      "userId": this.orders.userId
     };
     if (confirm('Are You Sure?')) {
+      this.spinner.loading = true;
       this.userService.removeOrderItem(body).subscribe(res => {
-        this.spinner.loading = true;
         if (res.status == 200) {
-          this.orderChannelsTableComp.destroyTable();
-          this.channelsTableComp.destroyTable();
-          this.initAddOrderItem(this.orders.orderId);
+          this.orders = res.data;
+          this.orderChannelsDataTable.destroy();
+          this.initalizeOrderItemsTable();
         } else {
           alert(res.message);
         }
       }, error => {
-        alert(this.getErrorMessage(error));
+        alert(this.getErrorMessage(error.json()));
+        this.spinner.loading = false;
       }, () => {
         this.spinner.loading = false;
       });
@@ -87,7 +99,10 @@ export class AddOrderItemComponent implements OnInit {
   }
 
   addOrderItem(id) {
-    this.spinner.loading = true;
+    if(!id){
+      alert("Please select item")
+      return;
+    }
     let body = {
       "packageId": [
       ],
@@ -101,14 +116,13 @@ export class AddOrderItemComponent implements OnInit {
       res => {
         this.spinner.loading = true;
         if (res.status == 200) {
-          this.orderChannelsTableComp.destroyTable();
-          this.channelsTableComp.destroyTable();
-          this.initAddOrderItem(this.orders.orderId);
+          this.orderChannelsDataTable.destroy();
+          this.initalizeOrderItemsTable();
         } else {
           alert(res.message);
         }
       }, error => {
-        alert(this.getErrorMessage(error));
+        alert(this.getErrorMessage(error.json()));
         this.spinner.loading = false;
       }, () => {
         this.spinner.loading = false;
@@ -120,9 +134,73 @@ export class AddOrderItemComponent implements OnInit {
   getErrorMessage(error) {
     let msg = ValidationMessage.SOMETHING_WENT_WRONG;
     if (error.message) {
-      msg = msg + ':' + error.message
+      msg = msg + ' : ' + error.message
     }
     return msg;
+  }
+
+  initalizeOrderItemsTable() {
+    const tableContext = this;
+    this.chRef.detectChanges();
+    setTimeout(function () {
+      const _table: any = tableContext.orderChannelsTableComp.nativeElement;
+      tableContext.orderChannelsDataTable = $(_table).DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            text: "Remove",
+            action: () => {
+              let selectedRow = $('#table-order-channels tbody tr.selected td.select-checkbox span').html();
+              tableContext.removeOrderItem(selectedRow);
+           }
+          }],
+        columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+        }],
+        select: {
+          style: 'os',
+          selector: 'td:first-child'
+        },
+        "order": [[1, 'asc']],
+        "autoWidth": false,
+        "orderClasses": false
+      }
+      );
+    }, 0);
+  }
+
+  initalizeChannelsTable() {
+    const tableContext = this;
+    this.chRef.detectChanges();
+    setTimeout(function () {
+      const _table: any = tableContext.channelsTableComp.nativeElement;
+      tableContext.channelsTable = $(_table).DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            text: "Add",
+            action: () => {
+              let selectedRow = $('#table-channels tbody tr.selected td.select-checkbox span').html();
+              tableContext.addOrderItem(selectedRow);
+            }
+          }],
+        columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+        }],
+        select: {
+          style: 'os',
+          selector: 'td:first-child'
+        },
+        "order": [[1, 'asc']],
+        "autoWidth": false,
+        "orderClasses": false
+      }
+      );
+    }, 0);
   }
 
 }

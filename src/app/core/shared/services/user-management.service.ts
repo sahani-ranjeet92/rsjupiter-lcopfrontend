@@ -52,7 +52,7 @@ export class UserManagementService {
   }
 
   removeOrderItem(body: any){
-    return null;
+    return this.httpHelper.post(this.userApiService.getRemoveOrderItemUrl(),body);
   }
 
 

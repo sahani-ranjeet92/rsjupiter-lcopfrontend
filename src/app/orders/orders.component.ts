@@ -4,7 +4,7 @@ import { forkJoin } from 'rxjs';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserManagementService } from '../core/shared/services/user-management.service';
 import { TableComponent } from '../common/table/table.component';
-import {ElementRef, ElementRef,  ChangeDetectorRef,  Component,  OnInit,  ViewChild} from '@angular/core';
+import { ElementRef, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { SpinnerComponent } from '../common/spinner/spinner.component';
 import * as $ from 'jquery';
 import 'bootstrap';
@@ -57,7 +57,6 @@ export class OrdersComponent implements OnInit {
       }
       this.chRef.detectChanges();
       this.tableComp.initalizeTable(user_list);
-
     }, error => {
       alert(ValidationMessage.SOMETHING_WENT_WRONG);
     }, () => {
@@ -100,7 +99,40 @@ export class OrdersComponent implements OnInit {
 
   createNewOrder() {
     console.log("create new order");
+    let body = {
+      "packageId": [
+      ],
+      "productIds": [
+        this.orderForm.get('catentryId').value
+      ],
+      "userId": this.orderForm.get('userId').value
+    }
+
+    this.userService.addOrderItem(body).subscribe(
+      res => {
+        this.spinner.loading = true;
+        if (res.status == 200) {
+          let order_list = res.data;
+          this.chRef.detectChanges();
+          this.tableComp.initalizeTable(order_list);
+        } else {
+          alert(res.message);
+        }
+      }, error => {
+        alert(this.getErrorMessage(error.json()));
+        this.spinner.loading = false;
+      }, () => {
+        this.spinner.loading = false;
+      }
+    );
   }
 
+  getErrorMessage(error) {
+    let msg = ValidationMessage.SOMETHING_WENT_WRONG;
+    if (error.message) {
+      msg = msg + ' : ' + error.message
+    }
+    return msg;
+  }
 
 }
