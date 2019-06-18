@@ -24,7 +24,6 @@ export class ChannelsComponent implements OnInit {
     public channelForm: FormGroup;
     public editChannelForm: FormGroup;
     catentryId: any;
-    loading: boolean = false;
 
     constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef, private fb: FormBuilder) {
         this.channelForm = this.fb.group({
@@ -116,7 +115,6 @@ export class ChannelsComponent implements OnInit {
     addChannel() {
         console.log("add channel");
         this.spinner.loading = true;
-        this.loading = true;
         console.log(this.channelImage.nativeElement.files[0]);
         let body = this.getFormData(this.channelForm, false);
         this.userService.addChannel(body).subscribe(res => {
@@ -128,11 +126,9 @@ export class ChannelsComponent implements OnInit {
                 alert(res.message);
             }
             this.spinner.loading = false;
-            this.loading = false;
         }, error => {
             alert(ValidationMessage.SOMETHING_WENT_WRONG);
             this.spinner.loading = false;
-            this.loading = false;
         }, () => {
 
         });

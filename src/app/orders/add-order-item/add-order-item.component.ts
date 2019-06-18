@@ -116,8 +116,11 @@ export class AddOrderItemComponent implements OnInit {
       res => {
         this.spinner.loading = true;
         if (res.status == 200) {
+          $('#table-channels tbody tr.selected').toggleClass('selected');
           this.orderChannelsDataTable.destroy();
           this.initalizeOrderItemsTable();
+          this.channelsTable.destroy();
+          this.initalizeChannelsTable();
         } else {
           alert(res.message);
         }

@@ -24,6 +24,7 @@ export class TableComponent implements OnInit {
   @Output() openAddModal = new EventEmitter<any>();
   @Output() openEditModal = new EventEmitter<any>();
   @Output() openRemoveModal = new EventEmitter<any>();
+  @Output() tableLoaded = new EventEmitter<any>();
   data: Array<any>;
   dataTable: any;
 
@@ -125,6 +126,7 @@ export class TableComponent implements OnInit {
         "orderClasses": false
       }
       );
+     tableContext.tableLoaded.emit();
     }, 0);
   }
 }

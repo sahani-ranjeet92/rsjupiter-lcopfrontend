@@ -60,7 +60,11 @@ export class OrdersComponent implements OnInit {
     }, error => {
       alert(ValidationMessage.SOMETHING_WENT_WRONG);
     }, () => {
-
+      debugger;
+      let button = $('#orders_table_wrapper > div.dt-buttons > button:nth-child(6)');
+      if(button){
+        button.css("display", "none");
+      }
     });
   }
 
@@ -112,9 +116,12 @@ export class OrdersComponent implements OnInit {
       res => {
         this.spinner.loading = true;
         if (res.status == 200) {
-          let order_list = res.data;
-          this.chRef.detectChanges();
-          this.tableComp.initalizeTable(order_list);
+          // let order_list = res.data;
+          // this.chRef.detectChanges();
+          // this.tableComp.initalizeTable(order_list);
+          this.tableComp.destroyTable();
+          this.loadOrderList();
+          $(this.add_order_modal.nativeElement).modal('hide');
         } else {
           alert(res.message);
         }
@@ -133,6 +140,14 @@ export class OrdersComponent implements OnInit {
       msg = msg + ' : ' + error.message
     }
     return msg;
+  }
+
+  tableLoaded(){
+      debugger;
+      let button = $('#orders_table_wrapper > div.dt-buttons > button:nth-child(6)');
+      if(button){
+        button.css("display", "none");
+      }
   }
 
 }
