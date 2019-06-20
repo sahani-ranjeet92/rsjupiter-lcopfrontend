@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
@@ -11,7 +12,8 @@ import { CommonComponentModule } from '../common/common.module';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    CommonComponentModule
+    CommonComponentModule,
+    ReactiveFormsModule
   ]
 })
 export class UsersModule { }

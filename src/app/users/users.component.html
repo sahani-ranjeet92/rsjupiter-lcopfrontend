@@ -1,3 +1,5 @@
+<app-spinner #appspinner></app-spinner>
+
 <app-table #userTableComp [heading]="'User List'" [id]="'users_table'" 
 [columns]="['userId',
 'username',
@@ -16,4 +18,120 @@
 'gender',
 'status',
 'dateOfBirth',
-'createdTimestamp']"></app-table>
+'createdTimestamp']" 
+(openAddModal)="openAddUserModal()" 
+(openEditModal)="openEditModal($event)" 
+(openRemoveModal)="openRemoveModal($event)" ></app-table>
+
+
+<div class="modal fade" #add_new_user_modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New User</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form" [formGroup]="addNewUserForm" >
+                <fieldset class="form-group">
+                    <label for="mobileno" >Mobile Number* :</label>
+                    <input type ="text" class="form-control" formControlName="mobileno" name="mobileno" required/>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="email" >Email :</label>
+                    <input type ="text" class="form-control" formControlName="email" name="email" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price" >First Name :</label>
+                    <input type ="text" class="form-control" formControlName="firstName" name="firstName" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="lastName" >Last Name :</label>
+                    <input type ="text" class="form-control" formControlName="lastName" name="lastName" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                   <fieldset class="form-group">
+                    <label for="gender" >Gender :</label>
+                    <select class="form-control" formControlName="gender" name="gender">
+                        <option value="M">Male</option>
+                        <option value="F">FeMale</option>
+                    </select>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                   <fieldset class="form-group">
+                    <label for="dateOfBirth" >Date of Birth :</label>
+                    <input type ="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth" placeholder="DD/MM/YYY">
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <button type="button" class="btn btn-primary" [disabled]="!addNewUserForm.valid || loading" (click)="addNewUser()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" #update_channel_modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update New Channel</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form" [formGroup]="updateUserForm" >
+                <fieldset class="form-group">
+                    <label for="mobileno" >Mobile Number* :</label>
+                    <input type ="text" class="form-control" formControlName="mobileno" name="mobileno" required/>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="email">Email :</label>
+                    <input type ="text" class="form-control" formControlName="email" name="email" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price" >First Name :</label>
+                    <input type ="text" class="form-control" formControlName="firstName" name="firstName" />
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="lastName" >Last Name :</label>
+                    <input type ="text" class="form-control" formControlName="lastName" name="lastName"/>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                   <fieldset class="form-group">
+                    <label for="gender" >Gender :</label>
+                    <select class="form-control" formControlName="gender" name="gender">
+                        <option value="M">Male</option>
+                        <option value="F">FeMale</option>
+                    </select>
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                   <fieldset class="form-group">
+                    <label for="dateOfBirth" >Date of Birth :</label>
+                    <input type ="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth" placeholder="DD/MM/YYY">
+                    <div class="valid-feedback"></div>
+                    <div class = "invalid-feedback">Please enter value</div>
+                </fieldset>
+                <button type="button" class="btn btn-primary" [disabled]="!updateUserForm.valid || loading" (click)="updateUser()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

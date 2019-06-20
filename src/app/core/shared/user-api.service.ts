@@ -14,12 +14,27 @@ export class UserApiService {
     return this.baseUrl + "/lco-user/getUser";
   }
 
-  getAllChannelListUrl() {
-    return this.baseUrl + "/product/getProductList";
-  }
-
   getAllUserListUrl() {
     return this.baseUrl + "/lco-user/getUserList";
+  }
+
+  getAddNewUserUrl() {
+    return this.baseUrl + "/lco-user/addNewUser";
+  }
+  getRemoveUserUrl() {
+    return this.baseUrl + "/lco-user/removeUser";
+  }
+
+  getUserDetailUrl() {
+    return this.baseUrl + "/lco-user/getUserDetail";
+  }
+
+  getUpdateUserUrl() {
+    return this.baseUrl + "/lco-user/updateUserDetail";
+  }
+
+  getAllChannelListUrl() {
+    return this.baseUrl + "/product/getProductList";
   }
 
   getAddChannelUrl() {

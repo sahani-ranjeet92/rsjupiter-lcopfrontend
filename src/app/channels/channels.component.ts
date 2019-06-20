@@ -24,6 +24,7 @@ export class ChannelsComponent implements OnInit {
     public channelForm: FormGroup;
     public editChannelForm: FormGroup;
     catentryId: any;
+    loading: boolean = false;
 
     constructor(private userService: UserManagementService, private chRef: ChangeDetectorRef, private fb: FormBuilder) {
         this.channelForm = this.fb.group({

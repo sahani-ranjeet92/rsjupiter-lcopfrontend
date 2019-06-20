@@ -29,3 +29,17 @@ export class Orders {
 
     }
 }
+
+export class UserDetail {
+    constructor(
+        public mobileno: string,
+        public email: string,
+        public firstName: string,
+        public lastName: string,
+        public gender: string,
+        public status: string,
+        public dateOfBirth: Date
+    ) {
+
+    }
+}

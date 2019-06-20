@@ -9,16 +9,37 @@ export class UserManagementService {
 
   constructor(private userApiService: UserApiService, private httpHelper: HttpHelperService) { }
 
+  //user service
+
   logIn(body: any) {
     return this.httpHelper.get(this.userApiService.getLoginUrl(), body, false, null);
   }
 
-  getAllChannelList() {
-    return this.httpHelper.get(this.userApiService.getAllChannelListUrl(), null);
-  }
-
   getAllUserList() {
     return this.httpHelper.get(this.userApiService.getAllUserListUrl(), null);
+  }
+
+  addNewUser(body: any) {
+    return this.httpHelper.post(this.userApiService.getAddNewUserUrl(), body);
+  }
+
+  removeUser(body: any) {
+    return this.httpHelper.post(this.userApiService.getRemoveUserUrl(), body, true);
+  }
+
+  getUserDetail(body: any) {
+    return this.httpHelper.post(this.userApiService.getUserDetailUrl(), body, true);
+  }
+
+  updateUser(body: any) {
+    return this.httpHelper.post(this.userApiService.getUpdateUserUrl(), body);
+  }
+
+
+  // channel service
+  
+  getAllChannelList() {
+    return this.httpHelper.get(this.userApiService.getAllChannelListUrl(), null);
   }
 
   addChannel(body: any) {
@@ -47,12 +68,12 @@ export class UserManagementService {
     return this.httpHelper.get(this.userApiService.getOrderDetailUrl(), body, true);
   }
 
-  addOrderItem(body: any){
+  addOrderItem(body: any) {
     return this.httpHelper.post(this.userApiService.getAddOrderItemUrl(), body);;
   }
 
-  removeOrderItem(body: any){
-    return this.httpHelper.post(this.userApiService.getRemoveOrderItemUrl(),body);
+  removeOrderItem(body: any) {
+    return this.httpHelper.post(this.userApiService.getRemoveOrderItemUrl(), body);
   }
 
 

@@ -60,11 +60,7 @@ export class OrdersComponent implements OnInit {
     }, error => {
       alert(ValidationMessage.SOMETHING_WENT_WRONG);
     }, () => {
-      debugger;
-      let button = $('#orders_table_wrapper > div.dt-buttons > button:nth-child(6)');
-      if(button){
-        button.css("display", "none");
-      }
+      
     });
   }
 
@@ -143,7 +139,6 @@ export class OrdersComponent implements OnInit {
   }
 
   tableLoaded(){
-      debugger;
       let button = $('#orders_table_wrapper > div.dt-buttons > button:nth-child(6)');
       if(button){
         button.css("display", "none");
