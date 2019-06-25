@@ -36,43 +36,37 @@
                 <fieldset class="form-group">
                     <label for="mobileno" >Mobile Number* :</label>
                     <input type ="text" class="form-control" formControlName="mobileno" name="mobileno" required/>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="mobileno.invalid && mobileno.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="email" >Email :</label>
-                    <input type ="text" class="form-control" formControlName="email" name="email" />
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <input type ="text" class="form-control" formControlName="email" name="email" required/>
+                    <div *ngIf="email.invalid && email.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="price" >First Name :</label>
-                    <input type ="text" class="form-control" formControlName="firstName" name="firstName" />
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <input type ="text" class="form-control" formControlName="firstName" name="firstName" required/>
+                    <div *ngIf="firstName.invalid && firstName.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="lastName" >Last Name :</label>
-                    <input type ="text" class="form-control" formControlName="lastName" name="lastName" />
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <input type ="text" class="form-control" formControlName="lastName" name="lastName" required/>
+                    <div *ngIf="lastName.invalid && lastName.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                    <fieldset class="form-group">
                     <label for="gender" >Gender :</label>
-                    <select class="form-control" formControlName="gender" name="gender">
+                    <select class="form-control" formControlName="gender" name="gender" required>
                         <option value="M">Male</option>
                         <option value="F">FeMale</option>
                     </select>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="gender.invalid && gender.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                    <fieldset class="form-group">
                     <label for="dateOfBirth" >Date of Birth :</label>
-                    <input type ="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth" placeholder="DD/MM/YYY">
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <input type ="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth" placeholder="DD/MM/YYY" required>
+                    <div *ngIf="dob.invalid && dob.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
-                <button type="button" class="btn btn-primary" [disabled]="!addNewUserForm.valid || loading" (click)="addNewUser()">Submit</button>
+                <button type="button" class="btn btn-primary" [disabled]="addNewUserForm.invalid || loading" (click)="addNewUser()">Submit</button>
                 </form>
             </div>
         </div>
@@ -90,28 +84,23 @@
             <div class="modal-body">
                 <form role="form" [formGroup]="updateUserForm" >
                 <fieldset class="form-group">
-                    <label for="mobileno" >Mobile Number* :</label>
-                    <input type ="text" class="form-control" formControlName="mobileno" name="mobileno" required/>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <label for="mobileno" >Mobile Number :</label>
+                    <input type ="text" class="form-control" formControlName="mobileno" name="mobileno" disabled="true"/>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="email">Email :</label>
                     <input type ="text" class="form-control" formControlName="email" name="email" />
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="email1.invalid && email1.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="price" >First Name :</label>
                     <input type ="text" class="form-control" formControlName="firstName" name="firstName" />
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="firstName1.invalid && firstName1.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="lastName" >Last Name :</label>
                     <input type ="text" class="form-control" formControlName="lastName" name="lastName"/>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="lastName1.invalid && lastName1.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                    <fieldset class="form-group">
                     <label for="gender" >Gender :</label>
@@ -119,16 +108,14 @@
                         <option value="M">Male</option>
                         <option value="F">FeMale</option>
                     </select>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="gender1.invalid && gender1.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
                    <fieldset class="form-group">
                     <label for="dateOfBirth" >Date of Birth :</label>
                     <input type ="date" class="form-control" formControlName="dateOfBirth" name="dateOfBirth" placeholder="DD/MM/YYY">
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="dob1.invalid && dob1.touched" class = "alert-danger">Please enter value</div>
                 </fieldset>
-                <button type="button" class="btn btn-primary" [disabled]="!updateUserForm.valid || loading" (click)="updateUser()">Submit</button>
+                <button type="button" class="btn btn-primary" [disabled]="updateUserForm.invalid || loading" (click)="updateUser()">Submit</button>
                 </form>
             </div>
         </div>

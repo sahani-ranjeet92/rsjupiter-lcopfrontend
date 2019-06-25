@@ -14,6 +14,7 @@ export class UserApiService {
     return this.baseUrl + "/lco-user/getUser";
   }
 
+
   getAllUserListUrl() {
     return this.baseUrl + "/lco-user/getUserList";
   }

@@ -31,15 +31,19 @@ export class Orders {
 }
 
 export class UserDetail {
+    public userId: number;
+    public username: string;
+    public email: string;
+    public firstName: string;
+    public lastName: string;
+    public gender: string;
+    public status: string;
+    public dateOfBirth: Date;
+    public createdTimestamp: Date;
+
     constructor(
-        public mobileno: string,
-        public email: string,
-        public firstName: string,
-        public lastName: string,
-        public gender: string,
-        public status: string,
-        public dateOfBirth: Date
     ) {
 
     }
+
 }

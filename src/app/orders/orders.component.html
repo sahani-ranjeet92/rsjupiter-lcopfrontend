@@ -25,7 +25,7 @@
 </app-table>
 
 
-<div class="modal fade" #add_order_modal>
+<div class="modal fade" #add_order_modal >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -33,15 +33,14 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form role="form" [formGroup]="orderForm" >
+                <form role="form" [formGroup]="orderForm" class="needs-validated">
                 <fieldset class="form-group">
                     <label for="userId" >Channel List:</label>
                     <select type ="text" class="form-control" formControlName="userId" name="userId" required>
-                       <option value="">Select Product</option>
-                 <option *ngFor="let row of userList" value="{{row.userId}}">{{row.username}}</option>   
+                      <option value="">Select Product</option>
+                      <option *ngFor="let row of userList" value="{{row.userId}}">{{row.username}}</option>   
                     </select>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="user.invalid || user.touched" class="alert-danger">Please enter value</div>
                 </fieldset>
                 
                 <fieldset class="form-group">
@@ -50,10 +49,9 @@
                        <option value="">Select Product</option>
                        <option *ngFor="let row of channelList" value="{{row.catentryId}}">{{row.chname}},{{row.chnumber}},{{row.price}}</option>   
                     </select>
-                    <div class="valid-feedback"></div>
-                    <div class = "invalid-feedback">Please enter value</div>
+                    <div *ngIf="catId.invalid || catId.touched" class="alert-danger">Please enter value</div>
                 </fieldset>
-                <button type="button" class="btn btn-primary" [disabled]="!orderForm.valid || loading" (click)="createNewOrder()">Submit</button>
+                <button type="button" class="btn btn-primary" [disabled]="orderForm.invalid || loading" (click)="createNewOrder()">Submit</button>
                 </form>
             </div>
         </div>

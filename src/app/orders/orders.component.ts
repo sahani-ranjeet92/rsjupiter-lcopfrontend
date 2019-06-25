@@ -145,4 +145,17 @@ export class OrdersComponent implements OnInit {
       }
   }
 
+  resetAddOrderForm(){
+    this.orderForm.reset({});
+  }
+
+  get user(){
+    return this.orderForm.get('userId');
+  }
+
+  get catId(){
+    return this.orderForm.get('catentryId');
+  }
+
+
 }

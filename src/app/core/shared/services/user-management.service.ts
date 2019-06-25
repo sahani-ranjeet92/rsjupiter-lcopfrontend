@@ -28,7 +28,7 @@ export class UserManagementService {
   }
 
   getUserDetail(body: any) {
-    return this.httpHelper.post(this.userApiService.getUserDetailUrl(), body, true);
+    return this.httpHelper.get(this.userApiService.getUserDetailUrl(), body, true);
   }
 
   updateUser(body: any) {

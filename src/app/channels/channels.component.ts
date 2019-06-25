@@ -178,4 +178,36 @@ export class ChannelsComponent implements OnInit {
         return formData;
     }
 
+    resetAddChannelForm() {
+        this.channelForm.reset();
+    }
+
+    get chnumber() {
+        return this.channelForm.get('chnumber');
+    }
+
+    get chname() {
+        return this.channelForm.get('chname');
+    }
+
+    get price(){
+        return this.channelForm.get('price');
+    }
+
+    get chImage(){
+        return this.channelForm.get('channelImage');
+    }
+
+    get chnumber1() {
+        return this.editChannelForm.get('chnumber');
+    }
+
+    get chname1() {
+        return this.editChannelForm.get('chname');
+    }
+
+    get price1(){
+        return this.editChannelForm.get('price');
+    }
+
 }
