@@ -1,0 +1,80 @@
+<app-spinner #appspinner></app-spinner>
+
+<div class="container">
+    <h3>Order# {{orders?.orderId}} UserId# {{orders?.userId}}</h3>
+    <h4>Price# {{orders?.totalPrice}}</h4>
+    <h4>Created On# {{orders?.creationDate}}</h4>
+    <h4>Updated On# {{orders?.lastUpdate}}</h4>
+
+    <!--<app-table #orderChannelsTableComp [heading]="''" [id]="'table-order-channels'" [columns]="['Action','Ch Number','Name','Image','Price']"
+        [rows]="['orderitemsId','chnumber','chname','url','productprice']" (openRemoveModal)="removeOrderItem($event)"></app-table>-->
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Order Items</h4>
+        </div>
+        <div class="card-body">
+            <div class='container-fluid table-responsive'>
+                <table #orderChannelsTableComp id="table-order-channels" class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Ch Number</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of orders?.channels">
+                            <!--<input type='checkbox' name='id_{{row.orderitemsId}}' value='{{row.orderitemsId}}'>-->
+                                <td><span style="display:none;">{{row.orderitemsId}}</span></td>
+                                <td>{{row.product?.chnumber}}</td>
+                                <td>{{row.product?.chname}}</td>
+                                <td>{{row.product?.url}}</td>
+                                <td>{{row.productprice}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<div class="card">
+        <div class="card-header">
+            <h4>Order Items</h4>
+        </div>
+        <div class="card-body">
+            <div class='container-fluid table-responsive'>
+                <table #channelsTableComp id="table-channels" class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Ch Number</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of channels">
+                            <!--<input type='checkbox' name='id_{{row.orderitemsId}}' value='{{row.orderitemsId}}'>-->
+                                <td><span style="display:none;">{{row.catentryId}}</span></td>
+                                <td>{{row.chnumber}}</td>
+                                <td>{{row.chname}}</td>
+                                <td>{{row.url}}</td>
+                                <td>{{row.price}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--<app-table #channelsTableComp [heading]="'Channels'" [id]="'table-channels'" [columns]="['Action','Ch Number','Name','Image','Price']"
+        [rows]="['catentryId','chnumber','chname','url','price']" (openEditModal)="addOrderItem($event)"></app-table>-->
+
+</div>

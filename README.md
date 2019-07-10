@@ -126,12 +126,25 @@ const dataTable = $('#table-channels').DataTable({
 buttons: ['copy', 'csv', 'excel', 'pdf', 'print']});
 
 
-##### call method of another component #####
-----> component A
+##### call method of another component (from child to parent)#####
+----> component A (child component)
 @Output() initTable = new EventEmitter();
 
------> component B
+-----> component B (parent component)
 define loadTableData() function
 
 -----> from component B html file
 <app-table (initTable)="loadTableData()"></app-table>
+
+#### access the function/properties of child component (from parent to child) ####
+#by template reference 
+-----> from component B html file
+<app-table #apptable (initTable)="loadTableData()"></app-table>
+
+------> from component B ts file
+@ViewChild('apptable') apptable: AppTableComponent;
+
+#for example:---
+apptable.anyproperty
+apptable.anyfunction
+
